@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPortfolio - Login</title>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables matching your custom Tailwind colors */
+        :root {
+            --brand-dark: #121212;
+            --brand-card: #1c1c1c;
+            --brand-header-from: #a01a14;
+            --brand-header-to: #80120d;
+            --brand-orange: #e65100;
+            --brand-orange-hover: #f57c00;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--brand-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: var(--brand-orange);
+            color: #ffffff;
+        }
+
+        /* Custom scrollbar matching dark theme */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--brand-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-orange);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-orange-hover);
+        }
+
+        /* Header Navigation */
+        .portfolio-nav {
+            background: linear-gradient(90deg, var(--brand-header-from) 0%, var(--brand-header-to) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            padding: 12px 16px;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+        }
+
+        .mobile-menu-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 8px;
+            display: block;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--brand-orange);
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        /* Main Section Container */
+        .main-container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 48px 16px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 448px;
+        }
+
+        /* Login Card */
+        .login-card {
+            background-color: var(--brand-card);
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--brand-orange);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .card-subtitle {
+            color: var(--brand-orange);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        /* Alert Container */
+        .alert-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .alert-box.hidden {
+            display: none;
+        }
+
+        .alert-success {
+            background-color: rgba(5, 46, 22, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #a7f3d0;
+        }
+
+        .alert-warning {
+            background-color: rgba(69, 26, 3, 0.8);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: #fde68a;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #d1d5db;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon-left {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 14px;
+            color: #6b7280;
+            font-size: 0.875rem;
+            pointer-events: none;
+        }
+
+        .input-icon-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            padding-right: 14px;
+            color: #6b7280;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .input-icon-right:hover {
+            color: var(--brand-orange);
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: var(--brand-dark);
+            border: 1px solid #1f2937;
+            color: #f3f4f6;
+            font-size: 0.875rem;
+            border-radius: 8px;
+            padding: 12px 16px 12px 40px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input.has-right-icon {
+            padding-right: 40px;
+        }
+
+        .form-input::placeholder {
+            color: #4b5563;
+        }
+
+        .form-input:focus {
+            border-color: var(--brand-orange);
+            box-shadow: 0 0 12px rgba(230, 81, 0, 0.35);
+            outline: none;
+        }
+
+        /* Additional Row (Remember & Forgot Password) */
+        .form-extra-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            padding-top: 4px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .checkbox-label:hover {
+            color: #d1d5db;
+        }
+
+        .checkbox-input {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            accent-color: var(--brand-orange);
+        }
+
+        .checkbox-text {
+            margin-left: 8px;
+        }
+
+        .link-orange {
+            color: var(--brand-orange);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .link-orange:hover {
+            color: var(--brand-orange-hover);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            margin-top: 8px;
+            background-color: var(--brand-orange);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.875rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--brand-orange-hover);
+            box-shadow: 0 10px 20px rgba(124, 45, 18, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Divider */
+        .divider-container {
+            position: relative;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .divider-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #1f2937;
+            z-index: 1;
+        }
+
+        .divider-text {
+            position: relative;
+            z-index: 2;
+            background-color: var(--brand-card);
+            padding: 0 12px;
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        /* Card Footer Link */
+        .card-footer-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .card-footer-text a {
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .card-footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Bar */
+        .footer-bar {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid #1f2937;
+            padding: 24px 0;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .footer-secondary-text {
+            color: #9ca3af;
+        }
+
+        /* Media Queries for Desktop Viewport */
+        @media (min-width: 768px) {
+            .portfolio-nav {
+                padding: 12px 32px;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                width: auto;
+                margin-top: 0;
+            }
+
+            .card-title {
+                font-size: 1.875rem;
+            }
+
+            .card-desc {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (min-width: 640px) {
+            .footer-container {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <header class="portfolio-nav">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-logo">
+                MyPortfolio
+            </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav id="navLinks" class="nav-links">
+                <!-- Additional nav items can go here -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN LOGIN CONTAINER -->
+    <main class="main-container">
+        <div class="login-wrapper">
+            <!-- Floating Login Card -->
+            <div class="login-card">
+                
+                <!-- Header Title -->
+                <div class="card-header">
+                    <span class="card-subtitle">Account Access</span>
+                    <h1 class="card-title">Welcome Back</h1>
+                    <p class="card-desc">Log in to manage your portfolio settings</p>
+                </div>
+
+                <!-- Alert Message Container -->
+                <div id="alertBox" class="alert-box alert-success hidden">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span id="alertText">Logged in successfully! Redirecting...</span>
+                </div>
+
+                <!-- Sign In Form -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    
+                    <!-- Username or Email Input -->
+                    <div class="form-group">
+                        <label for="username" class="form-label">
+                            Username or Email
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon-left">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+                            <input type="text" id="username" required placeholder="e.g. samantha@domain.com" class="form-input">
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon-left">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="password" required placeholder="••••••••" class="form-input has-right-icon">
+                            
+                            <!-- Password Toggle Eye Icon -->
+                            <button type="button" onclick="togglePasswordVisibility()" class="input-icon-right" aria-label="Toggle password visibility">
+                                <i id="togglePasswordIcon" class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="form-extra-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            <span class="checkbox-text">Remember me</span>
+                        </label>
+                        <a href="javascript:void(0)" onclick="handleForgotPassword()" class="link-orange">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn" class="btn-submit">
+                        <span>Log In</span>
+                        <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider-container">
+                    <div class="divider-line"></div>
+                    <span class="divider-text">or continuation</span>
+                </div>
+
+                <!-- Footer Sign Up Link -->
+                <p class="card-footer-text">
+                    Don't have an account? 
+                    <a href="javascript:void(0)" onclick="handleSignUpPrompt()" class="link-orange">
+                        Sign Up
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER Section -->
+    <footer class="footer-bar">
+        <div class="footer-container">
+            <p>© 2026 Samantha | Web Developer & EMC Student</p>
+            <p class="footer-secondary-text">Created using HTML & CSS</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Toggle mobile navigation menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Toggle password show/hide feature
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePasswordIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Form Submission Logic Demo
+        function handleLogin(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const alertBox = document.getElementById('alertBox');
+            const alertText = document.getElementById('alertText');
+
+            // Reset alert styling to success state
+            alertBox.className = "alert-box alert-success";
+
+            // Button loading animation
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...`;
+
+            setTimeout(() => {
+                // Show success notification banner
+                alertText.textContent = "Log in successful! Welcome back, Samantha.";
+                alertBox.classList.remove('hidden');
+
+                // REDIRECT TO HOME PAGE
+                setTimeout(() => {
+                window.location.href = "profile.html";
+                }, 1000);
+
+    }, 1200);
+}
+
+        // Forgot password click prompt
+        function handleForgotPassword() {
+            const alertBox = document.getElementById('alertBox');
+            const alertText = document.getElementById('alertText');
+            
+            alertText.textContent = "Password reset instructions sent to your email!";
+            alertBox.className = "alert-box alert-warning";
+            alertBox.classList.remove('hidden');
+        }
+
+        // Sign up prompt
+        function handleSignUpPrompt() {
+            alert("Sign Up form can be linked here!");
+        }
+    </script>
+</body>
+</html>

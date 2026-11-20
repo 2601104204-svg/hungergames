@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #121212;
+            color: #f3f4f6;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 20px;
+            background: linear-gradient(90deg, #a01a14 0%, #80120d 100%);
+        }
+
+        .logo {
+            margin: 0;
+            color: #ffffff;
+            font-size: 1.35rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a:hover {
+            background: rgba(230, 81, 0, 0.85);
+        }
+
+        .hero {
+            width: 100%;
+            padding: 36px 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 760px;
+            background-color: #1c1c1c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px 18px;
+            text-align: center;
+        }
+
+        .welcome-gif {
+            display: block;
+            max-width: 100%;
+            width: 420px;
+            height: auto;
+            margin: 0 auto 18px;
+            border-radius: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 18px;
+            background-color: #e65100;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .section, .contact-section {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px;
+        }
+
+        .card-container, .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .card, .contact-info, .contact-form {
+            background-color: #1c1c1c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #374151;
+            font-family: inherit;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .contact-form button {
+            background-color: #e65100;
+            color: #ffffff;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .site-footer {
+            background-color: #0b0b0b;
+            border-top: 1px solid #262626;
+            padding: 20px 16px;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                justify-content: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h2 class="logo bounce-logo">MyPortfolio</h2>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="Gallery.html">Gallery</a></li>
+                <li><a href="Logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="hungergames.gif" alt="Welcome GIF" class="welcome-gif">
+            <p class="greeting">HELLO, WELCOME TO MY PORTFOLIO!</p>
+            <h1>Hi, I'm <span>Samantha</span></h1>
+            <h3>Web Developer | EMC Student</h3>
+            <p>
+                I create simple, creative, and user-friendly
+                websites using HTML and CSS.
+            </p>
+            <a href="#projects" class="btn">View My Projects</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+            I am an Entertainment Multimedia Computing student who enjoys
+            learning about web development, programming, and
+            designing creative digital experiences.
+            My goal is to develop useful and innovative
+            technology solutions.
+        </p>
+    </section>
+
+    <section id="skills" class="section skills-section">
+        <h2>My Skills</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>HTML</h3>
+                <p>Creating the structure of web pages.</p>
+            </div>
+            <div class="card">
+                <h3>CSS</h3>
+                <p>Designing layouts, colors, and animations.</p>
+            </div>
+            <div class="card">
+                <h3>Web Design</h3>
+                <p>Building attractive and user-friendly interfaces.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>My Projects</h2>
+        <div class="card-container">
+            <div class="card project-card">
+                <h3>Personal Portfolio</h3>
+                <p>A website introducing my background and skills.</p>
+            </div>
+            <div class="card project-card">
+                <h3>School Website</h3>
+                <p>A sample website presenting school information.</p>
+            </div>
+            <div class="card project-card">
+                <h3>Animation Project</h3>
+                <p>A creative animation using CSS effects.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h1>Contact Me</h1>
+        <p class="contact-subtitle">
+            Have a question or want to work together? Send me a message!
+        </p>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p><strong>Email:</strong> samantha@gmail.com</p>
+                <p><strong>Phone:</strong> 09XX-XXX-XXXX</p>
+                <p><strong>Address:</strong> Malaybalay City, Bukidnon</p>
+
+                <h3>Find Me Here</h3>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps?q=Malaybalay%20City%2C%20Bukidnon&output=embed"
+                        width="100%"
+                        height="260"
+                        style="border:0; border-radius:8px;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send a Message</h2>
+                <form>
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Write your message..." rows="5" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>© 2026 Samantha | Web Developer &amp; EMC Student</p>
+    </footer>
+</body>
+</html>
