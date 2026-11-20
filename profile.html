@@ -378,17 +378,16 @@
     updateClock();
 
     // 6. BACK TO TOP BUTTON
-    let topButton = document.getElementById("topButton");
+   let topButton = document.getElementById("topButton");
 
-    window.onscroll = function() {
-
-        if (document.documentElement.scrollTop > 200) {
-            topButton.style.display = "block";
-        } else {
-            topButton.style.display = "none";
-        }
-
-    };
+    window.addEventListener("scroll", function() {
+    let currentScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (currentScroll > 150) {
+        topButton.style.display = "block";
+    } else {
+        topButton.style.display = "none";
+    }
+});
 
     // Scroll back to the top
     function backToTop() {
